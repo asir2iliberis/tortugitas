@@ -40,13 +40,11 @@ def main():
     tortuga1 = tortuga.Tortuga()
     tortuga2 = tortuga.Tortuga()
     tortuga3 = tortuga.Tortuga()
-    tortuga4 = tortuga.Tortuga()
     patricio1= patricio.Patricio()
     bob1 = bob.Bob()
     tortuga1.redimensionar(95, 95)
     tortuga2.redimensionar(95, 95)
     tortuga3.redimensionar(95, 95)
-    tortuga4.redimensionar(95, 95)
     patricio1.redimensionar(150, 150)
     bob1.redimensionar(90, 90)
     
@@ -64,10 +62,9 @@ def main():
         reloj.tick(20)
         patricio1.colocar(pantalla, 570, 175)
         bob1.colocar(pantalla, 170 , 210)
-        tortuga1.colocar(pantalla, 250, 300)
-        tortuga2.colocar(pantalla, 340, 300)
-        tortuga3.colocar(pantalla, 430, 300)
-        tortuga4.colocar(pantalla, 520, 300)
+        tortuga1.colocar(pantalla, 260, 300)
+        tortuga2.colocar(pantalla, 385, 300)
+        tortuga3.colocar(pantalla, 510, 300)
      
     pygame.quit()  
 
