@@ -1,20 +1,15 @@
-'''
-Created on 11 oct. 2016
-
-@author: Administrator
-'''
 import pygame
 from pygame.constants import RLEACCEL
 #CONSTANTES
 
-ANCHO=0#1400
-ALTO=0#787
-#La clase tortuga hereda de la clase  Sprite
+ANCHO=1000
+ALTO=600
+
 class Tortuga(pygame.sprite.Sprite):
     def __init__(self):
       
         pygame.sprite.Sprite.__init__(self)
-        self.ImagenTortuga=pygame.image.load("../recursos2d/tortuga.png").convert_alpha()
+        self.ImagenTortuga=pygame.image.load("recursos2d/tortuga.png").convert_alpha()
     def colocar(self,pantalla,posicionX,posicionY):
         pantalla.blit(self.ImagenTortuga,(posicionX,posicionY))
     def redimensionar(self,ancho,alto):
@@ -28,7 +23,7 @@ class Tortuga(pygame.sprite.Sprite):
 class Patricio(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.ImagenPatricio=pygame.image.load("../recursos2d/patricio.png").convert_alpha()
+        self.ImagenPatricio=pygame.image.load("recursos2d/patricio.png").convert_alpha()
     def colocar(self,pantalla,posicionX,posicionY):
         pantalla.blit(self.ImagenPatricio,(posicionX,posicionY))
     def redimensionar(self,ancho,alto):
@@ -57,11 +52,11 @@ def main():
      
     pygame.display.set_caption("Tortugas en accion")
      
-    ico=pygame.image.load("../recursos2d/tortuga.png")
+    ico=pygame.image.load("recursos2d/tortuga.png")
     pygame.display.set_icon(ico)
     
      
-    fondo=cargar_imagen("../recursos2d/b.jpg")
+    fondo=cargar_imagen("recursos2d/b.jpg")
     pantalla.blit(fondo,(0,0))
     tortuga1=Tortuga()
     tortuga2=Tortuga()
