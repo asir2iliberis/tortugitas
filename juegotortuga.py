@@ -2,14 +2,24 @@ import pygame
 from pygame.constants import RLEACCEL
 #CONSTANTES
 
+<<<<<<< HEAD
 ANCHO=1000
 ALTO=600
 
+=======
+ANCHO=876
+ALTO=550
+#La clase tortuga hereda de la clase  Sprite
+>>>>>>> 3e91ad59a60d9cf4c801fdae0b1af032e17e601e
 class Tortuga(pygame.sprite.Sprite):
     def __init__(self):
       
         pygame.sprite.Sprite.__init__(self)
+<<<<<<< HEAD
         self.ImagenTortuga=pygame.image.load("recursos2d/tortuga.png").convert_alpha()
+=======
+        self.ImagenTortuga=pygame.image.load("recursos2d/tortuga1.png").convert_alpha()
+>>>>>>> 3e91ad59a60d9cf4c801fdae0b1af032e17e601e
     def colocar(self,pantalla,posicionX,posicionY):
         pantalla.blit(self.ImagenTortuga,(posicionX,posicionY))
     def redimensionar(self,ancho,alto):
@@ -27,8 +37,16 @@ class Patricio(pygame.sprite.Sprite):
     def colocar(self,pantalla,posicionX,posicionY):
         pantalla.blit(self.ImagenPatricio,(posicionX,posicionY))
     def redimensionar(self,ancho,alto):
-        #Escalar las tortugas
+
         self.ImagenPatricio=pygame.transform.scale(self.ImagenPatricio, (ancho, alto))
+class Bob(pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        self.ImagenBob=pygame.image.load("recursos2d/BOB.gif").convert_alpha()
+    def colocar(self,pantalla,posicionX,posicionY):
+        pantalla.blit(self.ImagenBob,(posicionX,posicionY))
+    def redimensionar(self,ancho,alto):
+        self.ImagenBob=pygame.transform.scale(self.ImagenBob, (ancho, alto))
 def cargar_imagen(nombre,transparente=False):
 
     try:
@@ -47,25 +65,37 @@ def main():
     pygame.init() 
     
      
-    pantalla=pygame.display.set_mode((ANCHO,ALTO), pygame.FULLSCREEN)
+    pantalla=pygame.display.set_mode((ANCHO,ALTO))
     
      
     pygame.display.set_caption("Tortugas en accion")
      
+<<<<<<< HEAD
     ico=pygame.image.load("recursos2d/tortuga.png")
     pygame.display.set_icon(ico)
     
      
     fondo=cargar_imagen("recursos2d/b.jpg")
+=======
+    ico=pygame.image.load("recursos2d/tortuga1.png")
+    pygame.display.set_icon(ico)
+    
+     
+    fondo=cargar_imagen("recursos2d/fondo1.jpg")
+>>>>>>> 3e91ad59a60d9cf4c801fdae0b1af032e17e601e
     pantalla.blit(fondo,(0,0))
     tortuga1=Tortuga()
     tortuga2=Tortuga()
     tortuga3=Tortuga()
+    tortuga4=Tortuga()
     patricio1=Patricio()
-    tortuga1.redimensionar(150, 150)
-    tortuga2.redimensionar(150, 150)
-    tortuga3.redimensionar(150, 150)
-    patricio1.redimensionar(250, 250)
+    bob1=Bob()
+    tortuga1.redimensionar(95, 95)
+    tortuga2.redimensionar(95, 95)
+    tortuga3.redimensionar(95, 95)
+    tortuga4.redimensionar(95, 95)
+    patricio1.redimensionar(150, 150)
+    bob1.redimensionar(90, 90)
     
     
      
@@ -79,10 +109,12 @@ def main():
                    
         pygame.display.update()  
         reloj.tick(20)
-        patricio1.colocar(pantalla, 1050, 225)
-        tortuga1.colocar(pantalla, 700, 475)
-        tortuga2.colocar(pantalla, 850, 475)
-        tortuga3.colocar(pantalla, 1000, 475)
+        patricio1.colocar(pantalla, 570, 175)
+        bob1.colocar(pantalla, 170 , 210)
+        tortuga1.colocar(pantalla, 250, 300)
+        tortuga2.colocar(pantalla, 340, 300)
+        tortuga3.colocar(pantalla, 430, 300)
+        tortuga4.colocar(pantalla, 520, 300)
      
     pygame.quit()  
 
