@@ -270,12 +270,15 @@ def main():
                 salto=False
             
 
-            if (tortuga1.rect.centery-90) < MposY:
-                print("colision tortuga1")
-            if (tortuga2.rect.centery-90) < MposY:
-                print("colision tortuga2")            
-            if (tortuga3.rect.centery-90) < MposY:
-                print("colision tortuga3")
+            if 205 <= MposX <= 305:
+                if (tortuga1.rect.centery-90) < MposY:
+                    print("colision tortuga1")
+            if 330 <= MposX <= 430:
+                if (tortuga2.rect.centery-90) < MposY:
+                    print("colision tortuga2")
+            if 465 <= MposX <= 555:           
+                if (tortuga3.rect.centery-90) < MposY:
+                    print("colision tortuga3")
                 
         pygame.display.flip()
      
