@@ -9,8 +9,19 @@ import patricio
 import bob
 import tortuga
 
+pygame.init()
+
 ANCHO=876
 ALTO=550
+
+pantalla = pygame.display.set_mode((876, 550))
+
+black = (0,0,0)
+red = (200,0,0)
+green = (0,128,0)
+cyan = (0,255,255)
+bright_red = (255,0,0)
+bright_green = (0,255,0)
 
 def imagen(filename, transparent=False):  
     image = pygame.image.load(filename)       
@@ -28,6 +39,51 @@ def cargar_imagen(nombre,transparente=False):
         color=imagen.get_at((0,0))
         imagen.set_colorkey(color, RLEACCEL)
     return imagen
+
+def text_objects(text, font):
+    textSurface = font.render(text, True, black)
+    return textSurface, textSurface.get_rect()
+
+def game_intro():
+
+    intro = True
+
+    while intro:
+        for event in pygame.event.get():
+            #print(event)
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+                
+        pantalla.fill(cyan)
+        largeText = pygame.font.SysFont('comicsansms',115)
+        TextSurf, TextRect = text_objects("Tortuguitas", largeText)
+        TextRect.center = ((876/2),(550/2))
+        pantalla.blit(TextSurf, TextRect)
+        button("GO!",150,450,100,50,green,bright_green,main)
+        button("Quit",550,450,100,50,red,bright_red,quitgame)
+        pygame.display.update()
+        
+def button(msg,x,y,w,h,ic,ac,action=None):
+    mouse = pygame.mouse.get_pos()
+    click = pygame.mouse.get_pressed()
+    print(click)
+    if x+w > mouse[0] > x and y+h > mouse[1] > y:
+        pygame.draw.rect(pantalla, ac,(x,y,w,h))
+        
+        if click[0] == 1 and action != None:
+            action()  
+    else:
+        pygame.draw.rect(pantalla, ic,(x,y,w,h))
+
+    smallText = pygame.font.SysFont("comicsansms",20)
+    textSurf, textRect = text_objects(msg, smallText)
+    textRect.center = ( (x+(w/2)), (y+(h/2)) )
+    pantalla.blit(textSurf, textRect)
+
+def quitgame():
+    pygame.quit()
+    quit()
 
 def main():
     
@@ -215,4 +271,7 @@ def main():
     pygame.quit()  
 
 if __name__ == "__main__":
+    game_intro()
     main()
+    quit()
+    
