@@ -269,11 +269,14 @@ def main():
                 bajada=False
                 salto=False
             
-            if patricio12.colliderect(tortuga1):
-                print('collision')
-            if patricio_inv2.colliderect(tortuga1):
-                print('collision')
 
+            if (tortuga1.rect.centery-90) < MposY:
+                print("colision tortuga1")
+            if (tortuga2.rect.centery-90) < MposY:
+                print("colision tortuga2")            
+            if (tortuga3.rect.centery-90) < MposY:
+                print("colision tortuga3")
+                
         pygame.display.flip()
      
     pygame.quit()  
