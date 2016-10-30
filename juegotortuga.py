@@ -67,7 +67,7 @@ def game_intro():
 def button(msg,x,y,w,h,ic,ac,action=None):
     mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
-    print(click)
+
     if x+w > mouse[0] > x and y+h > mouse[1] > y:
         pygame.draw.rect(pantalla, ac,(x,y,w,h))
         
@@ -141,6 +141,9 @@ def main():
     pygame.time.set_timer(USEREVENT+1, 1000)
     patricio1 = imagen("recursos2d/patricio.png",True)   
     patricio_inv=pygame.transform.flip(patricio1,True,False);
+    
+    patricio12 = patricio1.get_rect()
+    patricio_inv2= patricio_inv.get_rect()
  
     while salir!=True:
         time = clock.tick(60)
@@ -265,6 +268,11 @@ def main():
             if MposY>=185:
                 bajada=False
                 salto=False
+            
+            if patricio12.colliderect(tortuga1):
+                print('collision')
+            if patricio_inv2.colliderect(tortuga1):
+                print('collision')
 
         pygame.display.flip()
      
