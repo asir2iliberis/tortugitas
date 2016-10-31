@@ -5,7 +5,6 @@ import sys, pygame
 from time import clock
 from pygame.constants import K_q
 
-import patricio
 import bob
 import tortuga
 
@@ -84,7 +83,10 @@ def button(msg,x,y,w,h,ic,ac,action=None):
 def quitgame():
     pygame.quit()
     quit()
-
+    
+def bajar():
+    if self.rect.centery <= 430:
+                print ('estoy en la cordenada' +self.rect.centery)
 def main():
     
     pygame.init() 
@@ -119,15 +121,10 @@ def main():
     Rxixf[3]=(150,0,69,123)
     Rxixf[4]=(72,0,78,123)
     Rxixf[5]=(0,0,75,123)
-    
-
-    
     tortuga1 = tortuga.Tortuga()
     tortuga2 = tortuga.Tortuga()
     tortuga3 = tortuga.Tortuga()
-
     bob1 = bob.Bob()
-
     bob1.redimensionar(90, 90)
     nume2 = []
     nume2.append(tortuga1.gene())
@@ -141,10 +138,9 @@ def main():
     pygame.time.set_timer(USEREVENT+1, 1000)
     patricio1 = imagen("recursos2d/patricio.png",True)   
     patricio_inv=pygame.transform.flip(patricio1,True,False);
-    
     patricio12 = patricio1.get_rect()
     patricio_inv2= patricio_inv.get_rect()
- 
+
     while salir!=True:
         time = clock.tick(60)
         for event in pygame.event.get(): 
@@ -188,7 +184,7 @@ def main():
                     tortuga3.__init__()
                     nume2[2]=tortuga3.gene()
                     #print("tor2 generado:"+str(nume2[2]))
-        
+       
         pantalla.blit(fondo,(0,0))
 
         bob1.colocar(pantalla, 170 , 210)
@@ -279,7 +275,22 @@ def main():
             if 465 <= MposX <= 555:           
                 if (tortuga3.rect.centery-90) < MposY:
                     print("colision tortuga3")
-                
+           #PATRICIO Y SUS BAJADAS         
+            if 305 <= MposX <= 330:
+                if (tortuga1.rect.centery-90) < MposY:
+                    print("")
+                    bajada = True
+            if 430 <= MposX <= 465:
+                if (tortuga2.rect.centery-90) < MposY:
+                    print("")
+                    bajada = True
+            if 465 <= MposX <= 550:           
+                if (tortuga3.rect.centery) < MposY:
+                    print(MposY)
+                    bajada = True
+            
+          
+        
         pygame.display.flip()
      
     pygame.quit()  
