@@ -5,34 +5,22 @@ import sys, pygame
 from time import clock
 from pygame.constants import K_q
 
+import constantes
 import bob
 import tortuga
+import patricio
 
 pygame.init()
 
-ANCHO=876
-ALTO=550
 
-pantalla = pygame.display.set_mode((876, 550))
 
-black = (0,0,0)
-red = (200,0,0)
-green = (0,128,0)
-cyan = (0,255,255)
-bright_red = (255,0,0)
-bright_green = (0,255,0)
+pantalla = pygame.display.set_mode((constantes.ANCHO, constantes.ALTO))
 
-def imagen(filename, transparent=False):  
-    image = pygame.image.load(filename)       
-    return image.convert_alpha()
+
 
 def cargar_imagen(nombre,transparente=False):
 
-    try:
-        imagen=pygame.image.load(nombre)
-    
-    except(pygame.error):
-        print("No se puede cargar la imagen") 
+    imagen=pygame.image.load(nombre)
     imagen=imagen.convert()
     if transparente:
         color=imagen.get_at((0,0))
@@ -40,7 +28,7 @@ def cargar_imagen(nombre,transparente=False):
     return imagen
 
 def text_objects(text, font):
-    textSurface = font.render(text, True, black)
+    textSurface = font.render(text, True, constantes.black)
     return textSurface, textSurface.get_rect()
 
 def game_intro():
@@ -49,18 +37,18 @@ def game_intro():
 
     while intro:
         for event in pygame.event.get():
-            #print(event)
+
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
                 
-        pantalla.fill(cyan)
+        pantalla.fill(constantes.cyan)
         largeText = pygame.font.SysFont('comicsansms',115)
         TextSurf, TextRect = text_objects("Tortuguitas", largeText)
         TextRect.center = ((876/2),(550/2))
         pantalla.blit(TextSurf, TextRect)
-        button("GO!",150,450,100,50,green,bright_green,main)
-        button("Quit",550,450,100,50,red,bright_red,quitgame)
+        button("GO!",150,450,100,50,constantes.green,constantes.bright_green,main)
+        button("Quit",550,450,100,50,constantes.red,constantes.bright_red,quitgame)
         pygame.display.update()
         
 def button(msg,x,y,w,h,ic,ac,action=None):
@@ -84,13 +72,10 @@ def quitgame():
     pygame.quit()
     quit()
     
-def bajar():
-    if self.rect.centery <= 430:
-                print ('estoy en la cordenada' +self.rect.centery)
 def main():
     
     pygame.init() 
-    pantalla=pygame.display.set_mode((ANCHO,ALTO))
+    pantalla=pygame.display.set_mode((constantes.ANCHO,constantes.ALTO))
     pygame.display.set_caption("Tortugas en accion")
     ico=pygame.image.load("recursos2d/tortuga1.png")
     pygame.display.set_icon(ico)    
@@ -128,18 +113,12 @@ def main():
     bob1.redimensionar(90, 90)
     nume2 = []
     nume2.append(tortuga1.gene())
-    #print ("numero generado tor1 "+ str(nume2[0]))
     nume2.append(tortuga2.gene())
-    #print ("numero generado tor2 "+ str(nume2[1]))
     nume2.append(tortuga3.gene())
-    #print ("numero generado tor3 "+ str(nume2[2])) 
     salir=False
     clock = pygame.time.Clock()
     pygame.time.set_timer(USEREVENT+1, 1000)
-    patricio1 = imagen("recursos2d/patricio.png",True)   
-    patricio_inv=pygame.transform.flip(patricio1,True,False);
-    patricio12 = patricio1.get_rect()
-    patricio_inv2= patricio_inv.get_rect()
+    patricio1 = patricio.Patricio()
 
     while salir!=True:
         time = clock.tick(60)
@@ -152,13 +131,10 @@ def main():
                     if nume2[number-1] > 0:
                         if number == 1:
                             nume2[number-1]-= 1
-                            #print("tor1:"+str(nume2[number-1]))
                         if number == 2:
                             nume2[number-1]-= 1
-                            #print("tor2:"+str(nume2[number-1]))
                         if number == 3:
                             nume2[number-1]-= 1
-                            #print("tor3:"+str(nume2[number-1]))
                             
         for number in range(1,4):
             if nume2[number-1] == 1:
@@ -173,17 +149,14 @@ def main():
                 if number == 1:
                     tortuga1.__init__()
                     nume2[0]=tortuga1.gene()
-                    #print("tor1 generado:"+str(nume2[0]))
                     
                 if number == 2:
                     tortuga2.__init__()
                     nume2[1]=tortuga2.gene()
-                    #print("tor2 generado:"+str(nume2[1]))
                     
                 if number == 3:
                     tortuga3.__init__()
                     nume2[2]=tortuga3.gene()
-                    #print("tor2 generado:"+str(nume2[2]))
        
         pantalla.blit(fondo,(0,0))
 
@@ -201,11 +174,11 @@ def main():
             salto=True
            
         if teclado[K_RIGHT]:
-            MposX+=2
+            MposX+=3
             cont+=1
             direc=True
         elif teclado[K_LEFT]:
-            MposX-=2
+            MposX-=3
             cont+=1
             direc=False            
         else :
@@ -215,42 +188,23 @@ def main():
             if event.type == pygame.QUIT:
                 sys.exit()   
          
-        p=6
 
-        if cont==p:
-            i=0
-       
-        if cont==p*2:
-            i=1
-       
-        if cont==p*3:
-            i=2
-       
-        if cont==p*4:
-            i=3
-       
-        if cont==p*5:
-            i=4
-       
-        if cont==p*6:
-            i=5
-            cont=0 
  
         global salto_Par, bajada_Par
    
            
         if direc==True and salto==False :
-            pantalla.blit(patricio1, ( MposX, MposY),(xixf[i]))
+            pantalla.blit(patricio1.ImagenPatricio, ( MposX, MposY),(xixf[i]))
        
         if direc==False and salto==False :
-            pantalla.blit(patricio_inv, ( MposX, MposY),(Rxixf[i]))
+            pantalla.blit(patricio1.ImagenPatricio_inv, ( MposX, MposY),(Rxixf[i]))
 
         if salto==True:            
                
             if direc==True:
-                pantalla.blit(patricio1, ( MposX, MposY),(xixf[4]))
+                pantalla.blit(patricio1.ImagenPatricio, ( MposX, MposY),(xixf[4]))
             if direc==False:
-                pantalla.blit(patricio_inv, ( MposX, MposY),(Rxixf[4]))  
+                pantalla.blit(patricio1.ImagenPatricio_inv, ( MposX, MposY),(Rxixf[4]))  
                
             if bajada==False:
                 MposY-=4              
@@ -267,27 +221,15 @@ def main():
             
 
             if 205 <= MposX <= 305:
-                if (tortuga1.rect.centery-90) < MposY:
-                    print("colision tortuga1")
+                if not (tortuga1.rect.centery-90) < MposY:
+                    print("muerto")
             if 330 <= MposX <= 430:
-                if (tortuga2.rect.centery-90) < MposY:
-                    print("colision tortuga2")
+                if not (tortuga2.rect.centery-90) < MposY:
+                    print("muerto")
             if 465 <= MposX <= 555:           
-                if (tortuga3.rect.centery-90) < MposY:
-                    print("colision tortuga3")
-           #PATRICIO Y SUS BAJADAS         
-            if 305 <= MposX <= 330:
-                if (tortuga1.rect.centery-90) < MposY:
-                    print("")
-                    bajada = True
-            if 430 <= MposX <= 465:
-                if (tortuga2.rect.centery-90) < MposY:
-                    print("")
-                    bajada = True
-            if 465 <= MposX <= 550:           
-                if (tortuga3.rect.centery) < MposY:
-                    print(MposY)
-                    bajada = True
+                if not (tortuga3.rect.centery-90) < MposY:
+                    print("muerto")
+
             
           
         
